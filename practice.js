@@ -132,3 +132,123 @@ switch (key) {
   default:
     break;
 }
+
+
+
+// 3sum brute force
+// O(n^3)
+var threeSum = function(nums) {
+  let resultArray = []
+  // if (typeof nums !== 'object' || (!nums.length && nums.length !== 0)) {
+  //     return resultArray
+  // }
+  if (nums.length < 3) {
+      return []
+  }
+  for (let i = 0; i < nums.length - 2; i++) {
+      for (let j = i + 1; j < nums.length - 1; j++) {
+          for (let m = j + 1; m < nums.length; m++) {
+              if (nums[i] + nums[j] + nums[m] === 0) {
+                  resultArray.push([nums[i], nums[j], nums[m]])
+              }
+          }
+      }
+  }
+  let hashedArrays = {}
+  for (let n = 0; n < resultArray.length; n++) {
+      let sortedArray = resultArray[n].sort()
+      hashedArrays[sortedArray] = resultArray[n]
+  }
+  return Object.values(hashedArrays)
+};
+  
+
+// 3sum improved
+// O(n^2)
+
+var threeSum = function(nums) {
+  let resultArray = []
+  if (nums.length < 3) {
+      return []
+  }
+  let hashedNumbers = {}
+  let hashedArrays = {}
+  hashedNumbers[nums[0]] = 0
+  for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+          let difference = 0 - nums[i] - nums[j]
+          if ((hashedNumbers[difference] || hashedNumbers[difference] === 0) && hashedNumbers[difference] !== i && hashedNumbers[difference] !== j) {
+              let max = Math.max(nums[i], nums[j], difference)
+              let min = Math.min(nums[i], nums[j], difference)
+              if (!hashedArrays[[max, min]]) {
+                  hashedArrays[[max, min]] = true
+                  resultArray.push([nums[i], nums[j], difference])
+              } 
+          }
+          hashedNumbers[nums[j]] = j
+      }
+  }
+  return resultArray
+};
+
+// Given a collection of intervals, merge all overlapping intervals
+// o(n)
+var merge = function(intervals) {
+    
+  const result = [];
+  
+  if (!intervals || intervals.length === 0) {
+      return result;
+  }
+  
+  intervals.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : a[0] - b[0]);
+  
+  let current = intervals[0];
+  
+  for (let i = 1; i < intervals.length; i++) {
+      const next = intervals[i];
+      
+      if (next[0] <= current[1]) {
+          current[1] = Math.max(current[1], next[1]);
+      } else {
+          result.push(current);
+          current = next;
+      }
+  }
+  
+  result.push(current);
+  
+  return result;
+};
+
+
+// Given an array of integers greater than 0, find if its possible to split it in two (without redording elements), such that the sum of the two resulting arrays is the same. Print resulting arrays
+// O(n)
+
+const testCases = [
+  [1,2,3,4,5,6,21],
+  [1,90, 50, 30, 5, 3, 2, 1 ],
+  [1, 50, 900, 1000 ],
+];
+
+function split(arr){
+  let target = arr.reduce((acc,num) => acc + num)
+  if(target%2 === 0){
+    target = target/2
+  }else{
+    return false
+  }
+  let sum = 0
+  for (let i=0; i<arr.length; i++){
+    sum += arr[i]
+    if (sum === target){
+      return [arr.slice(0,i+1),arr.slice(i+1)]
+    }else if (sum > target){
+      return false
+  }
+  }
+}
+
+console.log("ans1 true", split(testCases[0]))
+console.log("ans2 true", split(testCases[1]))
+console.log("ans3 false", split(testCases[2]))
