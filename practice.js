@@ -252,3 +252,155 @@ function split(arr){
 console.log("ans1 true", split(testCases[0]))
 console.log("ans2 true", split(testCases[1]))
 console.log("ans3 false", split(testCases[2]))
+
+// convert Roman to number 
+// O(n)
+var romanToInt = function(s) {
+  let sum = 0
+    let map = {
+      I:1,
+      V:5,
+      X:10,
+      L:50,
+      C:100,
+      D:500,
+      M:1000,
+      IV:4,
+      IX:9,
+      XL:40,
+      XC:90,
+      CD:400,
+      CM:900
+    }
+    
+    if (!s.length){
+      return sum
+    }
+    let i = 0
+    while (i < s.length){
+        if(map[(s[i]+s[i+1])]){
+          sum += map[(s[i]+s[i+1])]
+          i+=2               
+        }else if (map[s[i]]){
+          sum += map[s[i]]
+          i++
+        }else{
+          return "not roman numeral"
+        }
+    }
+  return sum
+    
+};
+
+// integer to Roman
+// O(n) but a bit slot due to the logic
+var intToRoman = function(num) {
+  const map = {
+    1000: "M",
+      500: "D",
+      100: "C",
+       50: "L",
+       10: "X",
+        5: "V",
+        1: "I"
+  }
+  const keys = [1000,500,100,50,10,5,1]
+  let arr = []
+
+  for(let i = 0; i<keys.length;i++){
+    let curr = keys[i]
+    let prev = keys[i-1]
+    let prev2 = keys[i-2]
+      
+    if(num >= curr){
+      let roman = ""
+      let div= Math.floor(num/curr)
+      if(div === 4){
+          if(arr[arr.length-1] === map[prev]){
+              arr.pop()
+              roman = map[curr]+map[prev2]
+          }else{
+              roman = map[curr]+map[prev]    
+          }
+      }else{
+        roman =  map[curr].repeat(div)
+      }
+    arr.push(roman)
+    num =  num % curr
+    }
+  }
+    return arr.join("")
+      
+}
+
+// string to intiger (ASCII to integer)
+// O(n) but more complex than expected
+
+var myAtoi = function(str) {
+    
+  let symbol = ["+","-"]
+  let number = ["1","2","3","4","5","6","7","8","9","0"]
+  let arr = []
+  
+if(!str.length){
+    return 0
+}  
+
+for (let i = 0; i<str.length; i++){
+    let curr = str[i]
+    let next = str[i+1]
+    let prev = str[i-1]
+    
+    if (number.includes(curr)){
+        arr.push(curr)
+    }else if(symbol.includes(curr) && number.includes(next)){
+          arr.push(curr)   
+    }else if(curr === "."){
+        if (!arr.length){
+            arr.push('0.')
+        }else{
+            arr.push(curr)
+        }
+    }else if(curr === ' '){
+        if(arr.length){
+            str = ''
+        }else{
+            null
+        }
+    }else{
+        if(!arr.length){
+            return 0
+        }else{
+            str = ''
+        }
+    }
+}
+  if(!arr.length){
+      return 0
+  }
+  
+  let min = Math.pow(-2,31)
+  let max = Math.pow(2,31)-1
+  let num = parseInt(arr.join(""))
+  
+  num = Math.min(num,max)
+  num = Math.max(num,min)
+  return num
+};
+
+// string to intiger (ASCII to integer)
+// O(n) manipulating input before processing
+
+var myAtoi = function(str) {
+  let firstSegment = str.trim().split(" ")[0]
+  let num = parseInt(firstSegment)
+    
+  if(!num/1){
+      return 0
+  } 
+        
+  num = Math.min(num,Math.pow(2,31)-1)
+  num = Math.max(num,Math.pow(-2,31))
+    
+  return num
+};
