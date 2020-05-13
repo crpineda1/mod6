@@ -445,17 +445,3 @@ console.log("expect 2",minimumDistances([7,4,3,4,1,7]))
 js seems to be better with references
 py looks to be better with calculations (cleaner methods)
 
-Number: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
-Plain : a b c d e f g h i  j  k  l  m  n o p q r s t u v w x y z
-cyph A: m n b v c x z a s  d  f  g  h  j k l p o i u y t r e w q
-cyph B: b v c x z a s d f  g  h  j  k  l p o i u y t r e w q m n 
-
-P: rodriguez
-1: okvoszycq
-2: upxufsrzn
-3: opvussyzq
-
-P: Pineda
-1: 
-2: 
-3: 
