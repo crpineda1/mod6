@@ -23,9 +23,6 @@ console.log(stickers_for(phrase))
 console.log(stickers_for("iii"))
 console.log(stickers_for("taming giant gnats"))
 
-
-
-
 function funWithAnagrams(text) {
   // Write your code here
   let ref = {}
@@ -52,4 +49,17 @@ for(let i = 0; i<Object.keys(ref).length; i++){
 const blah = ['code', 'aaagmnrs', 'anagrams', 'doce']
 console.log("ans",funWithAnagrams(blah))
 
+
+// battleship lenght = 3
+// field  lenght/width =  n >3
+// . . . .
+// . . . .
+// . . . .
+// . . . .
+
+function dropBomb (coordinates){} // given function to check it bomb hits ship
+
+function sinkShip(field){
+
+}
 

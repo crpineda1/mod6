@@ -292,8 +292,9 @@ var romanToInt = function(s) {
     
 };
 
+
 // integer to Roman
-// O(n) but a bit slot due to the logic
+// O(n) but a bit slow due to the logic
 var intToRoman = function(num) {
   const map = {
     1000: "M",
@@ -333,74 +334,128 @@ var intToRoman = function(num) {
       
 }
 
-// string to intiger (ASCII to integer)
+// string to integer (ASCII to integer)
 // O(n) but more complex than expected
+// https://leetcode.com/problems/string-to-integer-atoi/
 
 var myAtoi = function(str) {
-    
-  let symbol = ["+","-"]
-  let number = ["1","2","3","4","5","6","7","8","9","0"]
-  let arr = []
-  
-if(!str.length){
-    return 0
-}  
 
-for (let i = 0; i<str.length; i++){
+  let symbol = ['+','-']
+  let number = ['1','2','3','4','5','6','7','8','9','0']
+  let arr = []
+
+  if(!str.length){
+    return 0
+  }
+
+  for (let i = 0; i<str.length; i++){
     let curr = str[i]
     let next = str[i+1]
-    let prev = str[i-1]
-    
+
     if (number.includes(curr)){
-        arr.push(curr)
+      arr.push(curr)
     }else if(symbol.includes(curr) && number.includes(next)){
-          arr.push(curr)   
-    }else if(curr === "."){
-        if (!arr.length){
-            arr.push('0.')
-        }else{
-            arr.push(curr)
-        }
+      arr.push(curr)   
+    }else if(curr === '.'){
+      if (!arr.length){
+        arr.push('0.')
+      }else{
+        arr.push(curr)
+      }
     }else if(curr === ' '){
-        if(arr.length){
-            str = ''
-        }else{
-            null
-        }
+      if(arr.length){
+        str = ''
+      }else{
+        null
+      }
     }else{
-        if(!arr.length){
-            return 0
-        }else{
-            str = ''
-        }
+      if(!arr.length){
+        return 0
+      }else{
+        str = ''
+      }
     }
-}
+  }
+
   if(!arr.length){
-      return 0
+    return 0
   }
   
   let min = Math.pow(-2,31)
   let max = Math.pow(2,31)-1
-  let num = parseInt(arr.join(""))
+  let num = parseInt(arr.join(''))
   
   num = Math.min(num,max)
   num = Math.max(num,min)
   return num
-};
+}
 
 // string to intiger (ASCII to integer)
 // O(n) manipulating input before processing
 
 var myAtoi = function(str) {
-  let firstSegment = str.trim().split(" ")[0]
+  let firstSegment = str.trim().split(' ')[0]
   let num = parseInt(firstSegment)
-    
+
   if(!num/1){
-      return 0
-  } 
-        
+    return 0
+  }
+
   num = Math.min(num,Math.pow(2,31)-1)
   num = Math.max(num,Math.pow(-2,31))
-    
+  
   return num
 };
+
+function minimumDistances(a) {
+  let map = {}
+  let results = []
+  for (let i = 0; i<a.length; i++){
+    let num = a[i]
+    if(map[num] >= 0){
+      results.push(i-map[num])
+    }else{
+      map[num] = i
+    }
+  }
+  return results.length === 0? -1 : Math.min(...results)
+}
+
+console.log("expect 3",minimumDistances([7,1,3,4,1,7]))
+console.log("expect 1",minimumDistances([7,3,3,4,1,7]))
+console.log("expect 5",minimumDistances([7,2,3,4,1,7]))
+console.log("expect -1",minimumDistances([9,2,3,4,1,7]))
+console.log("expect 2",minimumDistances([7,4,3,4,1,7]))
+
+/* differences
+
+- delcaring variables
+- blocks of code (tab vs parenthesis)
+- for loop
+- array methods 
+ - push vs append
+ - length py method vs js attribute
+- if/else 
+  - py: must convert to string
+  - js: allows dynamic
+- ternary 
+  - js: condition true:false
+  - py: true condition false
+
+js seems to be better with references
+py looks to be better with calculations (cleaner methods)
+
+Number: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
+Plain : a b c d e f g h i  j  k  l  m  n o p q r s t u v w x y z
+cyph A: m n b v c x z a s  d  f  g  h  j k l p o i u y t r e w q
+cyph B: b v c x z a s d f  g  h  j  k  l p o i u y t r e w q m n 
+
+P: rodriguez
+1: okvoszycq
+2: upxufsrzn
+3: opvussyzq
+
+P: Pineda
+1: 
+2: 
+3: 
