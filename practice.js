@@ -57,6 +57,8 @@ console.log("2","exp [5,1,2,3,4]", rotLeft([1,2,3,4,5],5))
 console.log("3","exp [5,1,2,3,4]", rotLeft([1,2,3,4,5],14))
 
 
+// doesn't work for all cases
+
 function minimumBribes(q) {
   let bribes = 0
   for (let i=1;i<=q.length;i++){
@@ -86,7 +88,6 @@ function minimumBribes(q) {
         bribes++
       }  
     }
-
   }
   return bribes
 }
@@ -123,15 +124,6 @@ taken -
 
 */
 
-
-switch (key) {
-  case value:
-    
-    break;
-
-  default:
-    break;
-}
 
 
 
