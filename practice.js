@@ -478,7 +478,29 @@ solve(s, words) {
     return resp
 }
 
-// knowing startsWith method
+// after startsWith method
 solve(s, words) {
   return words.filter(word => word.startsWith(s))
 }
+
+// Big Number
+// return largest number in row & col
+
+// checking for max of two arrays inside embeded for loop
+solve(matrix) {
+  let counter = 0
+  let maxes = []
+  for(let i=0; i<matrix[0].length; i++){
+      let col = []
+      for (let j=0; j<matrix.length; j++){
+          col.push(matrix[j][i])
+      }
+      for (let k=0; k<col.length; k++){    
+          if(col[k] === Math.max(...col,...matrix[k])){
+              maxes.push(col[k])
+          }
+      }
+  }
+  return maxes.length
+}
+
