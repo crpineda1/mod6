@@ -419,21 +419,61 @@ console.log("expect 5",minimumDistances([7,2,3,4,1,7]))
 console.log("expect -1",minimumDistances([9,2,3,4,1,7]))
 console.log("expect 2",minimumDistances([7,4,3,4,1,7]))
 
-/* differences
+// Column Sort
+// Given a two-dimensional integer matrix, sort each of the columns in ascending order.
+// https://binarysearch.io/question/241
 
-- delcaring variables
-- blocks of code (tab vs parenthesis)
-- for loop
-- array methods 
- - push vs append
- - length py method vs js attribute
-- if/else 
-  - py: must convert to string
-  - js: allows dynamic
-- ternary 
-  - js: condition true:false
-  - py: true condition false
+// double nested for loop
+// O(2n^2)
 
-js seems to be better with references
-py looks to be better with calculations (cleaner methods)
+solve(matrix) {
+  let res = []
+  let temp= []
+  for(let i=0; i<matrix[0].length; i++){
+      temp.push([])
+      for(let j=0; j<matrix.length; j++){
+          temp[i].push(matrix[j][i])
+      }
+  }
+  temp.forEach(arr => arr.sort((a,b)=> a-b))
+  
+  for(let i=0; i<temp[0].length; i++){
+      res.push([])
+      for(let j=0; j<temp.length; j++){
+          res[i].push(temp[j][i])
+      }
+  }
+  return res
+}
 
+// single nested for loop
+// O(n^2 +n)?
+
+solve(matrix) {
+  for(let i=0; i<matrix[0].length; i++){
+      let temp= []
+      for(let j=0; j<matrix.length; j++){
+          temp.push(matrix[j][i])
+      }
+      temp.sort((a,b)=> a-b)
+      for(let k=0; k<matrix.length; k++){
+          matrix[k][i] = temp[k]
+      }
+  }
+  return matrix
+}
+}
+
+// AutoComplete
+// return words in array that start with string
+
+// before starts with method
+solve(s, words) {
+    let resp = []
+    for(let i=0;i<words.length; i++){
+        if (words[i].split("").slice(0,s.length).join("") == s){
+            resp.push(words[i])
+        }
+    }
+    return resp
+}
