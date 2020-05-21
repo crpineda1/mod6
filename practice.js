@@ -419,6 +419,8 @@ console.log("expect 5",minimumDistances([7,2,3,4,1,7]))
 console.log("expect -1",minimumDistances([9,2,3,4,1,7]))
 console.log("expect 2",minimumDistances([7,4,3,4,1,7]))
 
+
+
 // Column Sort
 // Given a two-dimensional integer matrix, sort each of the columns in ascending order.
 // https://binarysearch.io/question/241
@@ -464,6 +466,7 @@ solve(matrix) {
 }
 
 
+
 // AutoComplete
 // return words in array that start with string
 // https://binarysearch.io/question/11 
@@ -483,6 +486,8 @@ solve(s, words) {
 solve(s, words) {
   return words.filter(word => word.startsWith(s))
 }
+
+
 
 // Big Number
 // return largest number in row & col in matrix
