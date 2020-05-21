@@ -462,7 +462,7 @@ solve(matrix) {
   }
   return matrix
 }
-}
+
 
 // AutoComplete
 // return words in array that start with string
@@ -484,11 +484,12 @@ solve(s, words) {
 }
 
 // Big Number
-// return largest number in row & col
+// return largest number in row & col in matrix
+// https://binarysearch.io/question/423
 
+// O(n^3)
 // checking for max of two arrays inside embeded for loop
 solve(matrix) {
-  let counter = 0
   let maxes = []
   for(let i=0; i<matrix[0].length; i++){
       let col = []
@@ -504,3 +505,26 @@ solve(matrix) {
   return maxes.length
 }
 
+// save row maxes first then only tracking colMax in integer
+// avoid max of arrays inside embeded for loop -> compare integers
+
+// build array for rowMaxes
+// run through column to find colMax
+// run again, increase maxes number is equal to both colMax & rowMax of that col
+
+solve(matrix) {
+  let maxes = 0
+  let rowMaxes = matrix.map(row => Math.max(...row))
+  for(let i=0; i<matrix[0].length; i++){
+      let colMax = matrix[0][i]
+      for (let j=1; j<matrix.length; j++){
+          colMax = Math.max(colMax,matrix[j][i])
+      }
+      for (let k=0; k<matrix.length; k++){    
+          if(matrix[k][i] === colMax && matrix[k][i] === rowMaxes[k]){
+              maxes++
+          }
+      }
+  }
+  return maxes
+}
