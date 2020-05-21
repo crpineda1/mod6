@@ -477,3 +477,8 @@ solve(s, words) {
     }
     return resp
 }
+
+// knowing startsWith method
+solve(s, words) {
+  return words.filter(word => word.startsWith(s))
+}
