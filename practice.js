@@ -501,18 +501,18 @@ solve(s, words) {
     return resp
 }
 
-// refactored split,slice,join
+// refactored split,slice,join with substr
 solve(s, words) {
-    let resp = []
-    for(let i=0;i<words.length; i++){
-      if (words[i].substr(0,s.length) == s){
-        resp.push(words[i])
-        }
-    }
-    return resp
+  let resp = []
+  for(let i=0;i<words.length; i++){
+    if (words[i].substr(0,s.length) == s){
+      resp.push(words[i])
+      }
+  }
+  return resp
 }
 
-// after startsWith method
+// refactored with startsWith method
 solve(s, words) {
   return words.filter(word => word.startsWith(s))
 }
