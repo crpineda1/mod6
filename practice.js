@@ -490,7 +490,7 @@ solve(s, words) {
 }
 
 
-//
+// refactored second for loop
 solve(s, words) {
     let resp = []
     for(let i=0;i<words.length; i++){
@@ -501,7 +501,7 @@ solve(s, words) {
     return resp
 }
 
-// before starts with method
+// refactored split,slice,join
 solve(s, words) {
     let resp = []
     for(let i=0;i<words.length; i++){
