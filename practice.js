@@ -471,12 +471,42 @@ solve(matrix) {
 // return words in array that start with string
 // https://binarysearch.io/question/11 
 
-// before starts with method
+// super long attemp
+solve(s, words) {
+  let resp = []
+  let flag
+  for (let i = 0; i < words.length; i++) {
+      flag = true
+      for (let j = 0; j < s.length; j ++) {
+          if (s[j] !== words[i][j]) {
+              flag = false
+          }
+      }
+      if (flag) {
+          resp.push(words[i]);   
+      }
+  }
+  return resp;
+}
+
+
+//
 solve(s, words) {
     let resp = []
     for(let i=0;i<words.length; i++){
         if (words[i].split("").slice(0,s.length).join("") == s){
             resp.push(words[i])
+        }
+    }
+    return resp
+}
+
+// before starts with method
+solve(s, words) {
+    let resp = []
+    for(let i=0;i<words.length; i++){
+      if (words[i].substr(0,s.length) == s){
+        resp.push(words[i])
         }
     }
     return resp
