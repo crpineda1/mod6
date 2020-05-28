@@ -564,3 +564,43 @@ solve(matrix) {
   }
   return maxes
 }
+
+// BST traversal
+// https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+// Find kth smallest element in BST
+
+
+//BFS
+// creates array of all nodes then sorts array and returns k-1 element
+var kthSmallest = function(root, k) {
+  let arr = []
+  let queue = [root]
+  let node
+  while(queue.length){
+    node = queue.shift()
+    if(node.left) queue.push(node.left)
+    if(node.right) queue.push(node.right)
+    arr.push(node.val)
+  }
+  console.log(arr)
+  arr.sort((a,b) => a-b)
+  return arr[k-1]
+};
+  
+
+
+// DFS pre-order 
+// save all node values in array then sort and return k-1 element
+var kthSmallest = function(root, k) {
+  let arr = []
+
+  function traverse(node){
+      arr.push(node.val)
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+  }
+
+  traverse(root)
+  arr.sort((a,b) => a-b)
+  return arr[k-1]
+} 
