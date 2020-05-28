@@ -604,3 +604,20 @@ var kthSmallest = function(root, k) {
   arr.sort((a,b) => a-b)
   return arr[k-1]
 } 
+
+// DFS in-order
+// realized that DFS by definition returns all nodes from smallest to largest if DFS in-order (no need to sort)
+var kthSmallest = function(root, k) {
+  let arr = []
+
+  function traverse(node){
+      if(node.left) traverse(node.left)
+      arr.push(node.val)
+      if(node.right) traverse(node.right)
+  }
+
+  traverse(root)
+
+  return arr[k-1]
+} 
+
