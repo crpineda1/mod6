@@ -564,3 +564,57 @@ solve(matrix) {
   }
   return maxes
 }
+
+// BST traversal
+
+// Kth Smallest Element in a BST
+// key is to remmber BST goes L -> R smallest to largets node
+// https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
+ //BFS
+var kthSmallest = function(root, k) {
+  let arr = []
+  let queue = [root]
+  let node
+  while(queue.length){
+      node = queue.shift()
+      if(node.left) queue.push(node.left)
+      if(node.right) queue.push(node.right)
+      arr.push(node.val)
+  }
+  console.log(arr)
+  arr.sort((a,b) => a-b)
+  return arr[k-1]
+}
+ // DFS in-order
+ var kthSmallest = function(root, k) {
+  let arr = []
+
+  function traverse(node){
+      if(node.left) traverse(node.left)
+      arr.push(node.val)
+      if(node.right) traverse(node.right)
+  }
+  
+  traverse(root)
+      
+  return arr[k-1]
+}
+
+// DFS in-order no saving arr
+var kthSmallest = function(root, k) {
+  let counter = 0
+  let ans = root
+  function traverse(node){
+      if(node.left) traverse(node.left)
+      counter++
+      if(counter === k) ans = node
+      if(counter>=k) return
+      if(node.right) traverse(node.right)
+  }
+
+  traverse(root)
+
+  return ans.val
+}
+
