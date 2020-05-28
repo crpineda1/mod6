@@ -621,3 +621,22 @@ var kthSmallest = function(root, k) {
   return arr[k-1]
 } 
 
+
+// DFS in-order no saving arr
+// no need for arr - just keep counter and node once equal to k, return node.val
+var kthSmallest = function(root, k) {
+  let counter = 0
+  let ans = root
+  
+  function traverse(node){
+      if(node.left) traverse(node.left)
+      counter++
+      if(counter === k) ans = node
+      if(counter>=k) return
+      if(node.right) traverse(node.right)
+  }
+  
+  traverse(root)
+  
+  return ans.val
+}
