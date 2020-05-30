@@ -576,13 +576,14 @@ var kthSmallest = function(root, k) {
   let arr = []
   let queue = [root]
   let node
+
   while(queue.length){
     node = queue.shift()
     if(node.left) queue.push(node.left)
     if(node.right) queue.push(node.right)
     arr.push(node.val)
   }
-  console.log(arr)
+
   arr.sort((a,b) => a-b)
   return arr[k-1]
 };
@@ -595,9 +596,9 @@ var kthSmallest = function(root, k) {
   let arr = []
 
   function traverse(node){
-      arr.push(node.val)
-      if(node.left) traverse(node.left)
-      if(node.right) traverse(node.right)
+    arr.push(node.val)
+    if(node.left) traverse(node.left)
+    if(node.right) traverse(node.right)
   }
 
   traverse(root)
@@ -611,13 +612,12 @@ var kthSmallest = function(root, k) {
   let arr = []
 
   function traverse(node){
-      if(node.left) traverse(node.left)
-      arr.push(node.val)
-      if(node.right) traverse(node.right)
+    if(node.left) traverse(node.left)
+    arr.push(node.val)
+    if(node.right) traverse(node.right)
   }
 
   traverse(root)
-
   return arr[k-1]
 } 
 
@@ -629,14 +629,13 @@ var kthSmallest = function(root, k) {
   let ans = root
   
   function traverse(node){
-      if(node.left) traverse(node.left)
-      counter++
-      if(counter === k) ans = node
-      if(counter>=k) return
-      if(node.right) traverse(node.right)
+    if(node.left) traverse(node.left)
+    counter++
+    if(counter === k) ans = node
+    if(counter>=k) return
+    if(node.right) traverse(node.right)
   }
-  
+
   traverse(root)
-  
   return ans.val
 }
